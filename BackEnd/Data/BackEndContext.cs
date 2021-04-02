@@ -15,5 +15,7 @@ namespace BackEnd.Data
         }
 
         public DbSet<BackEnd.Models.Speaker> Speaker { get; set; }
+
+        public DbSet<BackEnd.Models.Session> Session { get; set; }
     }
 }
