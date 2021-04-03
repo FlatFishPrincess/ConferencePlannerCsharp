@@ -8,7 +8,6 @@ namespace ConferenceDTO
 
         public int ID { get; set; }
 
-        [Required]
         [StringLength(4000)]
         public string Bio { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackEnd.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,21 +11,21 @@ namespace BackEnd.Data
         public static ConferenceDTO.SessionResponse MapSessionResponse(this Session session) =>
             new ConferenceDTO.SessionResponse
             {
-                Id = session.Id,
+                ID = session.ID,
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
                 Speakers = session.SessionSpeakers?
                                   .Select(ss => new ConferenceDTO.Speaker
                                   {
-                                      Id = ss.SpeakerId,
+                                      ID = ss.SpeakerID,
                                       Name = ss.Speaker.Name
                                   })
                                    .ToList(),
-                TrackId = session.TrackId,
+                TrackID = session.TrackID,
                 Track = new ConferenceDTO.Track
                 {
-                    Id = session?.TrackId ?? 0,
+                    ID = session?.TrackID ?? 0,
                     Name = session.Track?.Name
                 },
                 Abstract = session.Abstract
@@ -33,7 +34,7 @@ namespace BackEnd.Data
         public static ConferenceDTO.SpeakerResponse MapSpeakerResponse(this Speaker speaker) =>
             new ConferenceDTO.SpeakerResponse
             {
-                Id = speaker.Id,
+                ID = speaker.ID,
                 Name = speaker.Name,
                 Bio = speaker.Bio,
                 WebSite = speaker.WebSite,
@@ -41,7 +42,7 @@ namespace BackEnd.Data
                     .Select(ss =>
                         new ConferenceDTO.Session
                         {
-                            Id = ss.SessionId,
+                            ID = ss.SessionID,
                             Title = ss.Session.Title
                         })
                     .ToList()
@@ -50,15 +51,15 @@ namespace BackEnd.Data
         public static ConferenceDTO.AttendeeResponse MapAttendeeResponse(this Attendee attendee) =>
             new ConferenceDTO.AttendeeResponse
             {
-                Id = attendee.Id,
+                ID = attendee.ID,
                 FirstName = attendee.FirstName,
                 LastName = attendee.LastName,
                 UserName = attendee.UserName,
-                Sessions = attendee.SessionsAttendees?
+                Sessions = attendee.SessionAttendees?
                     .Select(sa =>
                         new ConferenceDTO.Session
                         {
-                            Id = sa.SessionId,
+                            ID = sa.SessionID,
                             Title = sa.Session.Title,
                             StartTime = sa.Session.StartTime,
                             EndTime = sa.Session.EndTime
