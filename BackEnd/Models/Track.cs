@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace BackEnd.Models
 {
-    public class Speaker : ConferenceDTO.Speaker
+    public class Track : ConferenceDTO.Track
     {
-        public virtual ICollection<SessionSpeaker> SessionSpeakers { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

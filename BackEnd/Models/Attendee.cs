@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public class Speaker : ConferenceDTO.Speaker
+    public class Attendee : ConferenceDTO.Attendee
     {
-        public virtual ICollection<SessionSpeaker> SessionSpeakers { get; set; }
+        public virtual ICollection<SessionAttendee> SessionAttendees { get; set; }
     }
 }

@@ -14,8 +14,19 @@ namespace BackEnd.Data
         {
         }
 
-        public DbSet<BackEnd.Models.Speaker> Speaker { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
 
-        public DbSet<BackEnd.Models.Session> Session { get; set; }
+        public DbSet<Session> Sessions { get; set; }
+        public DbSet<Track> Tracks { get; set; }
+        public DbSet<Attendee> Attendee { get; set; }
+        public DbSet<Tag> Tag { get; set; }
+        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.Entity<SessionSpeaker>().HasKey(sp => new { sp.SessionID, sp.SpeakerID });
+            modelBuilder.Entity<SessionAttendee>().HasKey(sp => new { sp.SessionID, sp.AttendeeID });
+            modelBuilder.Entity<SessionTag>().HasKey(sp => new { sp.SessionID, sp.TagID });
+        }
     }
 }

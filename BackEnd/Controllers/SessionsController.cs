@@ -25,14 +25,14 @@ namespace BackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Session>>> GetSession()
         {
-            return await _context.Session.ToListAsync();
+            return await _context.Sessions.ToListAsync();
         }
 
         // GET: api/Sessions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Session>> GetSession(int id)
         {
-            var session = await _context.Session.FindAsync(id);
+            var session = await _context.Sessions.FindAsync(id);
 
             if (session == null)
             {
@@ -78,7 +78,7 @@ namespace BackEnd.Controllers
         [HttpPost]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
-            _context.Session.Add(session);
+            _context.Sessions.Add(session);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetSession", new { id = session.ID }, session);
@@ -88,13 +88,13 @@ namespace BackEnd.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSession(int id)
         {
-            var session = await _context.Session.FindAsync(id);
+            var session = await _context.Sessions.FindAsync(id);
             if (session == null)
             {
                 return NotFound();
             }
 
-            _context.Session.Remove(session);
+            _context.Sessions.Remove(session);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,8 +102,43 @@ namespace BackEnd.Controllers
 
         private bool SessionExists(int id)
         {
-            return _context.Session.Any(e => e.ID == id);
+            return _context.Sessions.Any(e => e.ID == id);
         }
+
+
+
+
+        [HttpPost("upload")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> Upload([FromForm] ConferenceFormat format, IFormFile file)
+        {
+            var loader = GetLoader(format);
+
+            using (var stream = file.OpenReadStream())
+            {
+                await loader.LoadDataAsync(stream, _context);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        private static DataLoader GetLoader(ConferenceFormat format)
+        {
+            if (format == ConferenceFormat.Sessionize)
+            {
+                return new SessionizeLoader();
+            }
+            return new DevIntersectionLoader();
+        }
+
+        public enum ConferenceFormat
+        {
+            Sessionize,
+            DevIntersections
+        }
+
 
 
     }

@@ -18,6 +18,5 @@ namespace ConferenceDTO
 
         [StringLength(1000)]
         public string WebSite { get; set; }
-        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

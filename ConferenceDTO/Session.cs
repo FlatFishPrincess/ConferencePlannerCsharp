@@ -21,10 +21,9 @@ namespace ConferenceDTO
 
         public string Title { get; set; }
 
-        public int? TrackId { get; set; }
-        public int? ConferenceId { get; set; }
+        public int? TrackID { get; set; }
+        public int? ConferenceID { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
 
     }
 }

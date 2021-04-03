@@ -22,6 +22,5 @@ namespace ConferenceDTO
 
         [StringLength(256)]
         public string UserName { get; set; }
-        public virtual ICollection<Conference> Conferences { get; set; }
     }
 }

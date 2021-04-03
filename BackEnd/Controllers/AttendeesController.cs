@@ -12,47 +12,47 @@ namespace BackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SpeakersController : ControllerBase
+    public class AttendeesController : ControllerBase
     {
         private readonly BackEndContext _context;
 
-        public SpeakersController(BackEndContext context)
+        public AttendeesController(BackEndContext context)
         {
             _context = context;
         }
 
-        // GET: api/Speakers
+        // GET: api/Attendees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Speaker>>> GetSpeaker()
+        public async Task<ActionResult<IEnumerable<Attendee>>> GetAttendee()
         {
-            return await _context.Speakers.ToListAsync();
+            return await _context.Attendee.ToListAsync();
         }
 
-        // GET: api/Speakers/5
+        // GET: api/Attendees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Speaker>> GetSpeaker(int id)
+        public async Task<ActionResult<Attendee>> GetAttendee(int id)
         {
-            var speaker = await _context.Speakers.FindAsync(id);
+            var attendee = await _context.Attendee.FindAsync(id);
 
-            if (speaker == null)
+            if (attendee == null)
             {
                 return NotFound();
             }
 
-            return speaker;
+            return attendee;
         }
 
-        // PUT: api/Speakers/5
+        // PUT: api/Attendees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSpeaker(int id, Speaker speaker)
+        public async Task<IActionResult> PutAttendee(int id, Attendee attendee)
         {
-            if (id != speaker.ID)
+            if (id != attendee.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(speaker).State = EntityState.Modified;
+            _context.Entry(attendee).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SpeakerExists(id))
+                if (!AttendeeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace BackEnd.Controllers
             return NoContent();
         }
 
-        // POST: api/Speakers
+        // POST: api/Attendees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Speaker>> PostSpeaker(Speaker speaker)
+        public async Task<ActionResult<Attendee>> PostAttendee(Attendee attendee)
         {
-            _context.Speakers.Add(speaker);
+            _context.Attendee.Add(attendee);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSpeaker", new { id = speaker.ID }, speaker);
+            return CreatedAtAction("GetAttendee", new { id = attendee.ID }, attendee);
         }
 
-        // DELETE: api/Speakers/5
+        // DELETE: api/Attendees/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSpeaker(int id)
+        public async Task<IActionResult> DeleteAttendee(int id)
         {
-            var speaker = await _context.Speakers.FindAsync(id);
-            if (speaker == null)
+            var attendee = await _context.Attendee.FindAsync(id);
+            if (attendee == null)
             {
                 return NotFound();
             }
 
-            _context.Speakers.Remove(speaker);
+            _context.Attendee.Remove(attendee);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool SpeakerExists(int id)
+        private bool AttendeeExists(int id)
         {
-            return _context.Speakers.Any(e => e.ID == id);
+            return _context.Attendee.Any(e => e.ID == id);
         }
     }
 }
