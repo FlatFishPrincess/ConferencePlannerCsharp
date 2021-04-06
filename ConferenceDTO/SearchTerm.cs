@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConferenceDTO
 {
-    public class Tag
+    public class SearchTerm
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-
+        public string Query { get; set; }
     }
 }

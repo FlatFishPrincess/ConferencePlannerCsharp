@@ -7,6 +7,6 @@ namespace BackEnd.Models
 {
     public class Attendee : ConferenceDTO.Attendee
     {
-        public virtual ICollection<SessionAttendee> SessionAttendees { get; set; }
+        public virtual ICollection<SessionAttendee> SessionsAttendees { get; set; }
     }
 }

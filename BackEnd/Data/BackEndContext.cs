@@ -24,9 +24,9 @@ namespace BackEnd.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
-            modelBuilder.Entity<SessionSpeaker>().HasKey(sp => new { sp.SessionID, sp.SpeakerID });
-            modelBuilder.Entity<SessionAttendee>().HasKey(sp => new { sp.SessionID, sp.AttendeeID });
-            modelBuilder.Entity<SessionTag>().HasKey(sp => new { sp.SessionID, sp.TagID });
+            modelBuilder.Entity<SessionSpeaker>().HasKey(sp => new { sp.SessionId, sp.SpeakerId });
+            modelBuilder.Entity<SessionAttendee>().HasKey(sp => new { sp.SessionId, sp.AttendeeId });
+            modelBuilder.Entity<SessionTag>().HasKey(sp => new { sp.SessionId, sp.TagId });
         }
     }
 }

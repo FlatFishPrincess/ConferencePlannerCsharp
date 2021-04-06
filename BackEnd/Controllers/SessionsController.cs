@@ -29,10 +29,10 @@ namespace BackEnd.Controllers
         }
 
         // GET: api/Sessions/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Session>> GetSession(int id)
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<Session>> GetSession(int Id)
         {
-            var session = await _context.Sessions.FindAsync(id);
+            var session = await _context.Sessions.FindAsync(Id);
 
             if (session == null)
             {
@@ -43,11 +43,11 @@ namespace BackEnd.Controllers
         }
 
         // PUT: api/Sessions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSession(int id, Session session)
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkId=2123754
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> PutSession(int Id, Session session)
         {
-            if (id != session.ID)
+            if (Id != session.Id)
             {
                 return BadRequest();
             }
@@ -60,7 +60,7 @@ namespace BackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SessionExists(id))
+                if (!SessionExists(Id))
                 {
                     return NotFound();
                 }
@@ -74,21 +74,21 @@ namespace BackEnd.Controllers
         }
 
         // POST: api/Sessions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkId=2123754
         [HttpPost]
         public async Task<ActionResult<Session>> PostSession(Session session)
         {
             _context.Sessions.Add(session);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSession", new { id = session.ID }, session);
+            return CreatedAtAction("GetSession", new { Id = session.Id }, session);
         }
 
         // DELETE: api/Sessions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSession(int id)
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteSession(int Id)
         {
-            var session = await _context.Sessions.FindAsync(id);
+            var session = await _context.Sessions.FindAsync(Id);
             if (session == null)
             {
                 return NotFound();
@@ -100,9 +100,9 @@ namespace BackEnd.Controllers
             return NoContent();
         }
 
-        private bool SessionExists(int id)
+        private bool SessionExists(int Id)
         {
-            return _context.Sessions.Any(e => e.ID == id);
+            return _context.Sessions.Any(e => e.Id == Id);
         }
 
 

@@ -8,6 +8,6 @@ namespace ConferenceDTO
 {
     public class SpeakerResponse : Speaker
     {
-        public virtual ICollection<Session> Sessions { get; set; }
+        public ICollection<Session> Sessions { get; set; } = new List<Session>();
     }
 }

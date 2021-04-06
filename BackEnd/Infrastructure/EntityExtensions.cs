@@ -11,21 +11,21 @@ namespace BackEnd.Data
         public static ConferenceDTO.SessionResponse MapSessionResponse(this Session session) =>
             new ConferenceDTO.SessionResponse
             {
-                ID = session.ID,
+                Id = session.Id,
                 Title = session.Title,
                 StartTime = session.StartTime,
                 EndTime = session.EndTime,
                 Speakers = session.SessionSpeakers?
                                   .Select(ss => new ConferenceDTO.Speaker
                                   {
-                                      ID = ss.SpeakerID,
+                                      Id = ss.SpeakerId,
                                       Name = ss.Speaker.Name
                                   })
                                    .ToList(),
-                TrackID = session.TrackID,
+                TrackId = session.TrackId,
                 Track = new ConferenceDTO.Track
                 {
-                    ID = session?.TrackID ?? 0,
+                    Id = session?.TrackId ?? 0,
                     Name = session.Track?.Name
                 },
                 Abstract = session.Abstract
@@ -34,7 +34,7 @@ namespace BackEnd.Data
         public static ConferenceDTO.SpeakerResponse MapSpeakerResponse(this Speaker speaker) =>
             new ConferenceDTO.SpeakerResponse
             {
-                ID = speaker.ID,
+                Id = speaker.Id,
                 Name = speaker.Name,
                 Bio = speaker.Bio,
                 WebSite = speaker.WebSite,
@@ -42,7 +42,7 @@ namespace BackEnd.Data
                     .Select(ss =>
                         new ConferenceDTO.Session
                         {
-                            ID = ss.SessionID,
+                            Id = ss.SessionId,
                             Title = ss.Session.Title
                         })
                     .ToList()
@@ -51,15 +51,15 @@ namespace BackEnd.Data
         public static ConferenceDTO.AttendeeResponse MapAttendeeResponse(this Attendee attendee) =>
             new ConferenceDTO.AttendeeResponse
             {
-                ID = attendee.ID,
+                Id = attendee.Id,
                 FirstName = attendee.FirstName,
                 LastName = attendee.LastName,
                 UserName = attendee.UserName,
-                Sessions = attendee.SessionAttendees?
+                Sessions = attendee.SessionsAttendees?
                     .Select(sa =>
                         new ConferenceDTO.Session
                         {
-                            ID = sa.SessionID,
+                            Id = sa.SessionId,
                             Title = sa.Session.Title,
                             StartTime = sa.Session.StartTime,
                             EndTime = sa.Session.EndTime

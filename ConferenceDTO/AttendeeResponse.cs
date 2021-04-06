@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConferenceDTO
 {
-    public class AttendeeResponse : ConferenceDTO.Attendee
+    public class AttendeeResponse : Attendee
     {
-        public virtual ICollection<Session> Sessions { get; set; }
+        public ICollection<Session> Sessions { get; set; } = new List<Session>();
     }
 }

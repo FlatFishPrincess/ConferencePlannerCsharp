@@ -7,9 +7,9 @@ namespace BackEnd.Models
 {
     public class SessionTag
     {
-        public int SessionID { get; set; }
+        public int SessionId { get; set; }
         public Session Session { get; set; }
-        public int TagID { get; set; }
+        public int TagId { get; set; }
         public Tag Tag { get; set; }
     }
 }
